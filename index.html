@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ahorcado con Ruleta Profesional: Mantenimiento de PC</title>
+    <link href="https://googleapis.com" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- PANTALLA 1: LA RULETA CANVAS INTERACTIVA -->
+    <section id="pantalla-ruleta" class="pantalla">
+        <div class="contenedor" style="position: relative;">
+            <h1>CADA OVEJA <span>CON SU PAREJA</span></h1>
+            <p>Mantenimiento de PC | Pedagogía de las Ciencias Experimentales</p>
+
+            <!-- Contenedor Visual de la Ruleta Pro -->
+            <div style="position: relative; width: 350px; height: 350px; margin: 30px auto; display: flex; justify-content: center; align-items: center;">
+                <!-- Flecha Indicadora Derecha -->
+                <div style="position: absolute; right: -20px; top: 50%; transform: translateY(-50%); width: 0; height: 0; border-top: 15px solid transparent; border-bottom: 15px solid transparent; border-right: 25px solid #00f5ff; filter: drop-shadow(0 0 8px #00f5ff); z-index: 10;"></div>
+                
+                <!-- Lienzo de la Ruleta Gráfica -->
+                <canvas id="ruleta-canvas" width="350" height="350" style="border-radius: 50%; box-shadow: 0 0 35px rgba(0, 245, 255, 0.4); transition: transform 4s cubic-bezier(0.1, 0.8, 0.1, 1);"></canvas>
+            </div>
+
+            <!-- Texto de estado o resultado del sorteo -->
+            <h2 id="texto-resultado-ruleta" style="color: #00f5ff; min-height: 35px;">¡Giren para seleccionar un ciclo!</h2>
+
+            <!-- Contenedor para los dos botones en la Ruleta alineados -->
+            <div style="display: flex; justify-content: center; gap: 20px; margin-top: 15px;">
+                <button id="btn-girar-ruleta">¡GIRAR RULETA!</button>
+                <button id="btn-restaurar-ruleta" style="background: linear-gradient(45deg, #c77dff, #ff7675); box-shadow: 0 0 20px #c77dff;">
+                    Restaurar Ciclos
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- PANTALLA 2: REGISTRO DE PARTICIPANTES -->
+    <section id="pantalla-registro" class="pantalla oculto">
+        <div class="contenedor">
+            <h1>REGISTRO DE <span>PARTICIPANTES</span></h1>
+            
+            <div class="pregunta-box" style="margin-top: 30px;">
+                <h2 id="titulo-ciclo">Ciclo Seleccionado: Ciclo X</h2>
+                <p>Ingresen los nombres de los dos estudiantes que van a resolver este nivel.</p>
+            </div>
+
+            <div class="formulario">
+                <label for="jugador1">Participante 1 (Pregunta 1):</label>
+                <input type="text" id="jugador1" placeholder="Nombre del primer estudiante" autocomplete="off">
+                
+                <label for="jugador2">Participante 2 (Pregunta 2):</label>
+                <input type="text" id="jugador2" placeholder="Nombre del segundo estudiante" autocomplete="off">
+            </div>
+
+            <button id="btn-iniciar-nivel">Comenzar a Jugar</button>
+        </div>
+    </section>
+
+    <!-- PANTALLA 3: ÁREA DE JUEGO (EL AHORCADO) -->
+    <section id="pantalla-juego" class="pantalla oculto">
+        <div class="juego">
+            <div class="barra">
+                <div id="info-ciclo">Ciclo: -</div>
+                <div id="info-tiempo">Tiempo: 60s</div>
+                <div id="info-vidas">Intentos: 6</div>
+            </div>
+
+            <div class="tarjetaJugador" id="turno-jugador">
+                Turno de: Esperando...
+            </div>
+
+            <div class="pregunta-box" style="margin-top: 20px;">
+                <div id="contenedor-ahorcado" style="font-size: 24px; margin-bottom: 15px; letter-spacing: 2px;"></div>
+                <p id="pista-pregunta" style="font-weight: bold; color: #e8f9ff; margin-bottom: 20px;"></p>
+                <div id="palabra-oculta" style="font-size: 36px; letter-spacing: 10px; color: #00f5ff; text-shadow: 0 0 10px #00f5ff; margin-bottom: 20px; font-weight: bold;">
+                    _ _ _ _ _
+                </div>
+            </div>
+
+            <div style="margin-top: 20px;">
+                <button id="btn-pista" style="margin-top: 0; padding: 10px 25px; font-size: 14px; background: linear-gradient(45deg, #c77dff, #0077ff); box-shadow: 0 0 10px #c77dff;">
+                    Pedir Pista (<span id="pistas-restantes">3</span>/3)
+                </button>
+                <p id="texto-pista-extra" style="font-size: 16px; color: #c77dff; margin-top: 10px; min-height: 24px;"></p>
+            </div>
+
+            <div id="opciones" style="grid-template-columns: repeat(auto-fit, minmax(45px, 1fr)); gap: 10px; margin-top: 25px;"></div>
+
+            <div id="retroalimentacion" class="oculto">
+                <p id="texto-retroalimentacion"></p>
+            </div>
+
+            <button id="btn-siguiente" class="oculto">Siguiente</button>
+        </div>
+    </section>
+
+    <!-- PANTALLA 4: RESULTADOS FINALES -->
+    <section id="pantalla-resultados" class="pantalla oculto">
+        <div class="contenedor">
+            <h1>¡FIN DE LA <span>RONDA</span>!</h1>
+            <h2>Tabla de Clasificación de Pedagogía</h2>
+            <div id="resultadoFinal" class="pregunta-box" style="text-align: left;"></div>
+            <button onclick="location.reload()">Reiniciar Todo el Evento</button>
+        </div>
+    </section>
+
+    <script src="script.js"></script>
+</body>
+</html>
